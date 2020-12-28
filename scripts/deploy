@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd $(dirname $0)
+
+cp $(echo "echo ../BUILD/\$TARGET/\$TOOLCHAIN/kotodori-gateway-mbed.bin" | cat ../.mbed - | sh) $1
