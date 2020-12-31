@@ -1,7 +1,6 @@
 __pycache__/
 BUILD/
 .build
-.mbed
 projectfiles
 *.py*
 .env
