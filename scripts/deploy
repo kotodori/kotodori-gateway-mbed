@@ -1,5 +1,7 @@
 #!/bin/sh
 
 cd $(dirname $0)
+cd ../
 
-cp $(echo "echo ../BUILD/\$TARGET/\$TOOLCHAIN/kotodori-gateway-mbed.bin" | cat ../.mbed - | sh) $1
+echo "mbed-tools compile --toolchain \$MBED_TOOLCHAIN --mbed-target \$MBED_TARGET" | cat .env - | sh
+sudo cp ./cmake_build/kotodori-gateway-mbed.bin $(echo "echo \$DEPLOY_DIR" | cat .env - | sh)

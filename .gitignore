@@ -1,6 +1,3 @@
-__pycache__/
-BUILD/
-.build
-projectfiles
-*.py*
+.mbedbuild
+cmake_build/
 .env
