@@ -1,12 +1,19 @@
 #include <mbed.h>
 
-int main() {
-    DigitalOut out(PA_6);
-    BufferedSerial pc(USBTX, USBRX);
-    auto buffer = "hogehoge";
+InterruptIn button(USER_BUTTON);
+DigitalOut out(LED2);
 
+void flip() {
+    out = !out;
+}
+
+int main() {
+    //BufferedSerial pc(USBTX, USBRX);
+    //auto buffer = "hogehoge";
+
+    button.rise(&flip);
     while (true) {
-        out = !out;
-        pc.write(buffer, sizeof(buffer));
+       // out = !out;
+        //pc.write(buffer, sizeof(buffer));
     }
 }
