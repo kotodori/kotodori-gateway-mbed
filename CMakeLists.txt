@@ -11,7 +11,7 @@ include(${MBED_PATH}/tools/cmake/app.cmake)
 
 add_subdirectory(${MBED_PATH})
 
-add_executable(${APP_TARGET} src/Client.h src/controller/Port.cpp src/controller/Port.h src/controller/PortWriter.cpp src/controller/PortWriter.h)
+add_executable(${APP_TARGET} src/controller/Client.h src/controller/write.cpp src/controller/write.h src/BitQueue.cpp src/BitQueue.h src/controller/read.cpp src/controller/read.h src/controller/Client.cpp src/Packet.cpp src/Packet.h)
 
 mbed_configure_app_target(${APP_TARGET})
 

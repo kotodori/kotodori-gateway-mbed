@@ -1,19 +1,17 @@
 #include <mbed.h>
 
-InterruptIn button(USER_BUTTON);
+#include "controller/Client.h"
+
+controller::Client client;
 DigitalOut out(LED2);
 
-void flip() {
-    out = !out;
-}
-
 int main() {
-    //BufferedSerial pc(USBTX, USBRX);
-    //auto buffer = "hogehoge";
+    const auto hello = "Hello, world!";
 
-    button.rise(&flip);
+    client.writeData(std::vector<unsigned char>(hello, hello + std::strlen(hello)));
+
     while (true) {
-       // out = !out;
-        //pc.write(buffer, sizeof(buffer));
+        out = !out;
+        ThisThread::sleep_for(std::chrono::milliseconds(500));
     }
 }
