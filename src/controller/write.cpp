@@ -2,16 +2,16 @@
 #include "../BitQueue.h"
 
 
-static InterruptIn clockIn(PA_5);
-static InterruptIn latchIn(PA_6);
-static DigitalIn dataIn(PA_7);
-static DigitalOut dataOut(PB_6);
+static InterruptIn clockIn(PA_8, PullUp);
+static InterruptIn latchIn(PA_6, PullUp);
+static DigitalIn dataIn(PB_6);
+static DigitalOut dataOut(PA_7);
 
 static volatile bool writing = false;
 static BitQueue *bufferToWrite;
 
 static inline void writeBit() {
-    dataOut.write(bufferToWrite->pop());
+    dataOut.write(!bufferToWrite->pop());
 
     if (bufferToWrite->empty()) {
         writing = false;
@@ -39,5 +39,7 @@ void controller::port::write(const vector<unsigned char> &data) {
 
     while (writing);
 
+    latchIn.rise(nullptr);
+    clockIn.rise(nullptr);
     bufferToWrite = nullptr;
 }

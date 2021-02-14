@@ -3,7 +3,7 @@
 #include "controller/Client.h"
 
 controller::Client client;
-DigitalOut out(LED2);
+DigitalOut led(LED2);
 
 int main() {
     const auto hello = "Hello, world!";
@@ -11,7 +11,7 @@ int main() {
     client.writeData(std::vector<unsigned char>(hello, hello + std::strlen(hello)));
 
     while (true) {
-        out = !out;
+        led = !led;
         ThisThread::sleep_for(std::chrono::milliseconds(500));
     }
 }
