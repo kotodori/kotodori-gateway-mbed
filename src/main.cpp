@@ -1,12 +1,17 @@
 #include <mbed.h>
 
+#include "controller/Client.h"
+
+controller::Client client;
+DigitalOut led(LED2);
+
 int main() {
-    DigitalOut out(PA_6);
-    BufferedSerial pc(USBTX, USBRX);
-    auto buffer = "hogehoge";
+    const auto hello = "Hello, world!";
+
+    client.writeData(std::vector<unsigned char>(hello, hello + std::strlen(hello)));
 
     while (true) {
-        out = !out;
-        pc.write(buffer, sizeof(buffer));
+        led = !led;
+        ThisThread::sleep_for(std::chrono::milliseconds(500));
     }
 }
